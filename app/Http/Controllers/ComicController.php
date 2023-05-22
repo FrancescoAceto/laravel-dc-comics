@@ -37,6 +37,8 @@ class ComicController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validation($request);
+
         $formData = $request->all();
 
         $formData['price'] = '$' . number_format($formData['price'], 2);
@@ -105,5 +107,19 @@ class ComicController extends Controller
         $comic->delete();
 
         return redirect()->route('comics.index');
+    }
+
+    private function validation($request){
+
+        $request->validate([
+            'title' => 'required|max:200',
+            'description' => 'required',
+            'thumb' => 'required',
+            'price' => 'required|max:10',
+            'series' => 'required|max:50',
+            'sale_date' => 'nullable|date_format:Y-a-d',
+            'type' => 'required|max:20'
+        ]);
+
     }
 }
