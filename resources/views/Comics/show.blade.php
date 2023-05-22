@@ -37,5 +37,17 @@
             <div>{{$comic->type}}</div>
         </div>
     </div>
+
+    <div>
+
+    <a class="btn btn-primary offset-4" href="{{route('comics.edit', $comic)}}">Edit Comic</a>
+    <form action="{{route('comics.destroy', $comic->id)}}" method="POST">
+        @csrf
+        @method('DELETE')
+        <a class="btn btn-primary offset-4" href="{{route('comics.edit', $comic)}}">Remove Comic</a>
+    </form>
+    
+
+    </div>
 </div>
 @endsection
